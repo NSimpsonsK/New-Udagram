@@ -8,7 +8,9 @@ jobs:
     docker:
       - image: "cimg/base:stable"
     steps:
-      - node/install
+      - node/install:
+          install-yarn: true
+          node-version: "14.15"
       - checkout
       - aws-cli/setup
       - run:
@@ -22,11 +24,11 @@ jobs:
       - run:
           name: Front-End Build
           command: |
-            cd ./udagram-frontend && npm run build --openssl-legacy-provider
+            cd ./udagram-frontend && npm run build
       - run:
           name: Back-End Build
           command: |
-            cd ./udagram-api && npm run build --openssl-legacy-provider
+            cd ./udagram-api && npm run build
       - run:
           name: Deploy App
           command: |
