@@ -1,8 +1,8 @@
 version: 2.1
 orbs:
   node: circleci/node@4.1.0
-  aws-cli: circleci/aws-cli@2.0.3
-  eb: circleci/aws-elastic-beanstalk@2.0.1
+  eb: circleci/aws-elastic-beanstalk@1.0.0
+  aws-cli: circleci/aws-cli@2.0.2
 jobs:
   build:
     docker:
@@ -16,15 +16,6 @@ jobs:
           name: Check current version of node
           command: node -v
       - run:
-          name: Get and install node version manager.
-          command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-      - run:
-          name: Install Node version 12 using NVM
-          command: nvm install 12 
-      - run:
-          name: Use Node version 12 
-          command: nvm use 12     
-      - run:
           name: Front-End Install
           command: |
             cd ./udagram-frontend && npm install
@@ -35,11 +26,11 @@ jobs:
       - run:
           name: Front-End Build
           command: |
-            cd ./udagram-frontend && npm run build
+            cd ./udagram-frontend && npm run build --openssl-legacy-provider
       - run:
           name: Back-End Build
           command: |
-            cd ./udagram-api && npm run build
+            cd ./udagram-api && npm run build --openssl-legacy-provider
       - run:
           name: Deploy App
           command: |
