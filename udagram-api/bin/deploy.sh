@@ -10,4 +10,4 @@ eb setenv POSTGRES_USERNAME=$POSTGRES_USERNAME
             AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID	
             AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY	
             JWT_SECRET=$JWT_SECRET
-eb deploy
+eb deploy --profile default
